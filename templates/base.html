@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        {% include '__head.html' %}
+    </head>
+    <body>
+        {% include '__header.html' %}
+
+        {% block content %}
+        {% endblock %}
+
+        <div class="text-center text-white position-fixed scroll-to-top">
+            <i class="fas fa-angle-up fa-2x"></i>
+        </div>
+        
+        <a href="cart.html" title="Корзина" class="text-center text-white position-fixed cart">
+            <span class="badge badge-pill badge-light">0</span>
+            <i class="fas fa-shopping-basket"></i>
+        </a>
+
+        {% include '__footer.html' %}
+
+        {% include '__scripts.html' %}
+    </body>
+</html>

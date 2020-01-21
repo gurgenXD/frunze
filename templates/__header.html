@@ -1,0 +1,103 @@
+{% load static%}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" id="Navbar">
+    <div class="container position-relative">
+        <div class="navbar-brand d-flex align-items-center py-0">
+            <a href="index.html" title="МСЗ имени М.В. Фрунзе"><img src="{% static 'images/logo.svg' %}" class="mr-2 mr-sm-3" alt=""></a>
+            <div class="">
+                <p class="small m-0 text-dark d-none d-sm-block">Майкопский станкостроительный завод<br> имени М. В. Фрунзе</p>
+                <p class="small m-0 text-dark d-sm-none font-weight-bold">МСЗ им. М. В. Фрунзе</p>
+                <a href="tel:+78772525212" title="Позвонить" class="mb-0 mx-auto small text-primary navbar-phone">+7 (8772) 52-52-12</a>
+            </div>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="offcanvas">
+            <span class="navbar-toggler-icon"><i class="fas fa-bars"></i><i class="fas fa-times"></i></span>
+        </button>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-lowercase" href="content.html" title="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        о заводе<i class="fas fa-chevron-down fa-xs ml-2"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="content.html" title="">История предприятия</a>
+                        <a class="dropdown-item" href="newsfeed.html" title="">Новости и события</a>
+                        <a class="dropdown-item" href="documents.html" title="">Документы</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-lowercase" href="content.html" title="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        продукция<i class="fas fa-chevron-down fa-xs ml-2"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="catalogue-category.html" title="">Станки отделочно-расточные вертикальные</a>
+                        <a class="dropdown-item" href="catalogue-category.html" title="">Станки хонинговальные вертикальные</a>
+                        <a class="dropdown-item" href="catalogue-category.html" title="">Станки ленточно-отрезные</a>
+                        <a class="dropdown-item" href="catalogue-category.html" title="">Станки круглошлифовальные</a>
+                        <a class="dropdown-item" href="catalogue-category.html" title="">Принадлежности к станкам</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-lowercase" href="content.html" title="">услуги</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-lowercase" href="contacts.html" title="">контакты</a>
+                </li>
+            </ul>
+
+            <div class="search-button">
+                <a href="#" class="search-toggle text-dark" data-selector="#Navbar"><i class="fas fa-search"></i><i class="fas fa-times"></i></a>
+            </div>
+
+            <form action="" class="search-box">
+                <input type="text" class="text search-input typeahead form-control pl-3" placeholder="найти товар..." />
+            </form>
+        </div>
+
+        <div class="d-lg-none offcanvas-collapse navbar-expand-lg">
+            <div class="container">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="content.html" title="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            О заводе<i class="fas fa-chevron-down fa-xs ml-2"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="content.html" title="">История предприятия</a>
+                            <a class="dropdown-item" href="newsfeed.html" title="">Новости и события</a>
+                            <a class="dropdown-item" href="documents.html" title="">Документы</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="content.html" title="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Продукция<i class="fas fa-chevron-down fa-xs ml-2"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="catalogue-category.html" title="">Станки отделочно-расточные вертикальные</a>
+                            <a class="dropdown-item" href="catalogue-category.html" title="">Станки хонинговальные вертикальные</a>
+                            <a class="dropdown-item" href="catalogue-category.html" title="">Станки ленточно-отрезные</a>
+                            <a class="dropdown-item" href="catalogue-category.html" title="">Станки круглошлифовальные</a>
+                            <a class="dropdown-item" href="catalogue-category.html" title="">Принадлежности к станкам</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="content.html" title="">Услуги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacts.html" title="">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+<div class="bg-light pt-2 pb-4 mt-n1 d-lg-none search-sm">
+    <div class="container px-sm-0 px-3">
+        <form action="" class="search-box">
+            <input type="text" class="text search-input typeahead form-control pl-5" placeholder="найти товар..." />
+        </form>
+    </div>
+</div>
