@@ -28,3 +28,21 @@ class IndexView(View):
             'advantages': advantages,
         }
         return render(request, 'core/index.html', context)
+
+
+class AboutView(View):
+    @staticmethod
+    def get(request):
+
+        context = {
+        }
+        return render(request, 'core/about.html', context)
+
+
+# class ExtendedFlatPageView(View):
+#     @staticmethod
+#     def get(request):
+
+#         context = {
+#         }
+#         return render(request, 'flatpages/default.html', context)

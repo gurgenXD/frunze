@@ -15,7 +15,7 @@ class NewsAdmin(admin.ModelAdmin):
     )
 
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'text', 'is_active', 'created')
+    list_display = ('title', 'is_active', 'created')
     list_editable = ('is_active',)
     list_filter = ('is_active',)
     search_fields = ('title', 'text')

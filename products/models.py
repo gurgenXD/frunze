@@ -55,3 +55,30 @@ class Product(SEO):
 
     def __str__(self):
         return self.title
+        
+
+class Characteristic(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Товар', related_name='characteristics')
+    title = models.CharField(max_length=250, verbose_name='Название')
+    value = models.CharField(max_length=250, verbose_name='Значение')
+
+    class Meta:
+        verbose_name = 'Характеристика'
+        verbose_name_plural = 'Характеристики'
+
+    def __str__(self):
+        return self.title
+
+
+class Option(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Товар', related_name='options')
+    title = models.CharField(max_length=250, verbose_name='Название')
+    value = models.CharField(max_length=250, verbose_name='Значение')
+    product_for = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Ссылка на товар', related_name='options_for', null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Пункт'
+        verbose_name_plural = 'Комплектация'
+
+    def __str__(self):
+        return self.title

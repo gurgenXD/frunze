@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.flatpages.models import FlatPage
 from contacts.models import Phone
 from uuid import uuid1
 
@@ -30,7 +31,7 @@ class Position(models.Model):
         ordering = ('position',)
 
 
-class Index(SEO):
+class Index(models.Model):
     title = models.CharField(max_length=250, verbose_name='Заголовок')
     phone = models.ForeignKey(Phone, on_delete=models.SET_NULL, verbose_name='Телефон', null=True)
     slogan = models.CharField(max_length=250, verbose_name='Слоган')
@@ -63,3 +64,17 @@ class Advantage(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class TitleTag(models.Model):
+    url = models.CharField(max_length=250, verbose_name='URL')
+    seo_title = models.CharField(max_length=250, verbose_name='Title', null=True, blank=True)
+    seo_desc = models.CharField(max_length=250, verbose_name='Description', null=True, blank=True)
+    seo_kwrds = models.CharField(max_length=250, verbose_name='Keywords', null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'SEO title'
+        verbose_name_plural = 'SEO titles'
+
+    def __str__(self):
+        return self.seo_title

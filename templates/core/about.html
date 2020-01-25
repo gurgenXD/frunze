@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<main role="main">
+    <div class="container py-lg-5 py-4">
+        <ol class="breadcrumb d-none d-md-flex mb-3 mb-lg-4">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item active">О заводе</li>
+        </ol>
+
+        <a href="{% url 'index' %}" title="" class="d-block d-md-none text-dark font-weight-bold smaller mb-3"><i class="fas fa-arrow-left fa-xs mr-2"></i>Главная</a>
+
+        <h1 class="mb-lg-5 mb-4">О заводе</h1>
+        <ul class="list-unstyled">
+            <li>
+                <a href="content.html" class="d-block py-1" title="">История предприятия</a>
+            </li>
+            <li>
+                <a href="{% url 'news' %}" class="d-block py-1" title="">Новости и события</a>
+            </li>
+            <li>
+                <a href="{% url 'documents' %}" class="d-block py-1" title="">Документы</a>
+            </li>
+        </ul>
+    </div>
+</main>
+{% endblock %}

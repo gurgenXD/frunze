@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ flatpage.seo_title }}</title>
+    <meta name="description" content="{{ flatpage.seo_desc }}">
+    <meta name="keywords" content="{{ flatpage.seo_kwrds }}"> 
+{% endblock %}
+
+{% block content %}
+<main role="main">
+    <div class="container py-lg-5 py-4">
+        <ol class="breadcrumb d-none d-md-flex mb-3 mb-lg-4">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'about' %}">О заводе</a></li>
+            <li class="breadcrumb-item active">{{ flatpage.title }}</li>
+        </ol>
+        
+        <a href="{% url 'about' %}" title="" class="d-block d-md-none text-dark font-weight-bold smaller mb-3"><i class="fas fa-arrow-left fa-xs mr-2"></i>О заводе</a>
+        
+        <article class="mb-5">
+            <h1 class="mt-0">{{ flatpage.title }}</h1>
+            {{ flatpage.content|safe }}
+        </article>
+
+    </div>
+</main>
+{% endblock %}

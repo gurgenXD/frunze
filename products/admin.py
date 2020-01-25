@@ -2,6 +2,20 @@ from django.contrib import admin
 from products.models import *
 
 
+class CharacteristicInline(admin.TabularInline):
+    model = Characteristic
+    extra = 0
+    fk_name = "product"
+    classes = ('grp-collapse grp-closed',)
+
+
+class OptionInline(admin.TabularInline):
+    model = Option
+    extra = 0
+    fk_name = "product"
+    classes = ('grp-collapse grp-closed',)
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
@@ -19,6 +33,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ('is_active', 'price')
     list_filter = ('is_active', 'category__title', 'subcategory__title')
     search_fields = ('title', 'category__title', 'subcategory__title', 'article')
+    inlines = (CharacteristicInline, OptionInline)
 
     class Media:
         js = (

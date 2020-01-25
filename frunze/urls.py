@@ -23,8 +23,11 @@ admin.site.site_header = 'Frunze'
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
+    path('', include('django.contrib.flatpages.urls')),
     path('', include('core.urls')),
-    #path('news/', include('news.urls')),
+    path('news/', include('news.urls')),
+    path('documents/', include('documents.urls')),
+    path('contacts/', include('contacts.urls')),
 ]
 
 

@@ -1,13 +1,14 @@
 {% load static%}
+{% load telephone %}
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" id="Navbar">
     <div class="container position-relative">
         <div class="navbar-brand d-flex align-items-center py-0">
-            <a href="index.html" title="МСЗ имени М.В. Фрунзе"><img src="{% static 'images/logo.svg' %}" class="mr-2 mr-sm-3" alt=""></a>
+            <a href="{% url 'index' %}" title="МСЗ имени М.В. Фрунзе"><img src="{% static 'images/logo.svg' %}" class="mr-2 mr-sm-3" alt=""></a>
             <div class="">
                 <p class="small m-0 text-dark d-none d-sm-block">Майкопский станкостроительный завод<br> имени М. В. Фрунзе</p>
                 <p class="small m-0 text-dark d-sm-none font-weight-bold">МСЗ им. М. В. Фрунзе</p>
-                <a href="tel:+78772525212" title="Позвонить" class="mb-0 mx-auto small text-primary navbar-phone">+7 (8772) 52-52-12</a>
+                <a href="tel:+{{ main_phone|make_phone }}" title="Позвонить" class="mb-0 mx-auto small text-primary navbar-phone">{{ main_phone }}</a>
             </div>
         </div>
 
