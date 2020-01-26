@@ -24,8 +24,8 @@
             <i class="fas fa-angle-up fa-2x"></i>
         </div>
         
-        <a href="cart.html" title="Корзина" class="text-center text-white position-fixed cart">
-            <span class="badge badge-pill badge-light">0</span>
+        <a href="{% url 'cart' %}" title="Корзина" class="text-center text-white position-fixed cart">
+            <span id="cart-len" class="badge badge-pill badge-light">{{ cart_len }}</span>
             <i class="fas fa-shopping-basket"></i>
         </a>
 

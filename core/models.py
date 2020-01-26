@@ -37,6 +37,7 @@ class Index(models.Model):
     slogan = models.CharField(max_length=250, verbose_name='Слоган')
     desc = models.TextField(verbose_name='Описание')
     about = models.TextField(verbose_name='О нас')
+    document = models.FileField(upload_to='index/price/', max_length=250, verbose_name='Прайс')
 
     class Meta:
         verbose_name = 'Главная страница'
@@ -78,3 +79,30 @@ class TitleTag(models.Model):
 
     def __str__(self):
         return self.seo_title
+
+
+class MailToString(models.Model):
+    email = models.EmailField(max_length=250, verbose_name='E-mail')
+
+    class Meta:
+        verbose_name = 'Кому отправлять письмо'
+        verbose_name_plural = 'Кому отправлять письмо'
+
+    def __str__(self):
+        return self.email
+
+
+class MailFromString(models.Model):
+    use_tls = models.BooleanField(verbose_name='EMAIL_USE_TLS(gmail.com, mail.ru)')
+    use_ssl = models.BooleanField(verbose_name='EMAIL_USE_SSL(yandex.ru)')
+    port = models.PositiveIntegerField(verbose_name='EMAIL_PORT')
+    host = models.CharField(max_length=250, verbose_name='EMAIL_HOST')
+    host_user = models.EmailField(max_length=250, verbose_name='EMAIL_HOST_USER')
+    host_password = models.CharField(max_length=250, verbose_name='EMAIL_HOST_PASSWORD')
+
+    class Meta:
+        verbose_name = 'Откуда отправлять письмо'
+        verbose_name_plural = 'Откуда отправлять письмо'
+
+    def __str__(self):
+        return self.host_user

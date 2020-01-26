@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-
+{% load flatpages %}
+{% get_flatpages as flatpages %}
 
 {% block content %}
 <main role="main">
@@ -14,14 +15,19 @@
         <h1 class="mb-lg-5 mb-4">О заводе</h1>
         <ul class="list-unstyled">
             <li>
-                <a href="content.html" class="d-block py-1" title="">История предприятия</a>
-            </li>
-            <li>
                 <a href="{% url 'news' %}" class="d-block py-1" title="">Новости и события</a>
             </li>
             <li>
                 <a href="{% url 'documents' %}" class="d-block py-1" title="">Документы</a>
             </li>
+
+            {% for page in flatpages %}
+                {% if page.url != '/uslugi/' and page.url != '/personal-data/' %}
+                <li>
+                    <a href="{{ page.url }}" class="d-block py-1" title="">{{ page.title }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
         </ul>
     </div>
 </main>

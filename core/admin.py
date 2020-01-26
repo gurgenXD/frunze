@@ -4,11 +4,15 @@ from django.contrib.flatpages.admin import FlatPageAdmin
 from core.models import *
 
 
+admin.site.register(MailFromString)
+admin.site.register(MailToString)
+
+
 @admin.register(Index)
 class IndexAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('title', 'phone', 'slogan', 'desc', 'about')
+            'fields': ('title', 'phone', 'slogan', 'desc', 'about', 'document')
         }),
     )
     list_display = ('title', 'phone', 'slogan')

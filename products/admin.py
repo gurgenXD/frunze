@@ -5,14 +5,25 @@ from products.models import *
 class CharacteristicInline(admin.TabularInline):
     model = Characteristic
     extra = 0
-    fk_name = "product"
     classes = ('grp-collapse grp-closed',)
 
 
 class OptionInline(admin.TabularInline):
     model = Option
     extra = 0
-    fk_name = "product"
+    fk_name = 'product'
+    classes = ('grp-collapse grp-closed',)
+
+
+class ImageInline(admin.TabularInline):
+    model = Image
+    extra = 0
+    classes = ('grp-collapse grp-closed',)
+
+
+class BarTypeInline(admin.TabularInline):
+    model = BarType
+    extra = 0
     classes = ('grp-collapse grp-closed',)
 
 
@@ -20,7 +31,7 @@ class OptionInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('category', 'subcategory', 'title', 'article', 'price', 'desc', 'is_active')
+            'fields': ('category', 'subcategory', 'title', 'article', 'price', 'in_stock', 'desc', 'is_active')
         }),
         ('SEO', {
             'fields': ('slug', 'seo_title', 'seo_desc', 'seo_kwrds'),
@@ -29,17 +40,17 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'category', 'subcategory', 'article', 'price', 'is_active', 'created', 'updated')
-    list_editable = ('is_active', 'price')
+    list_display = ('title', 'category', 'subcategory', 'article', 'price', 'in_stock', 'is_active', 'created', 'updated')
+    list_editable = ('is_active', 'price', 'in_stock')
     list_filter = ('is_active', 'category__title', 'subcategory__title')
     search_fields = ('title', 'category__title', 'subcategory__title', 'article')
-    inlines = (CharacteristicInline, OptionInline)
+    inlines = (ImageInline, CharacteristicInline, OptionInline, BarTypeInline)
 
     class Media:
         js = (
             '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
             '/static/grappelli/tinymce_setup/tinymce_setup.js',
-            '/static/js/back.js',
+            '/static/js/my-admin.js',
         )
 
 
@@ -47,7 +58,7 @@ class ProductAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('title', 'is_active')
+            'fields': ('title',)
         }),
         ('SEO', {
             'fields': ('slug', 'seo_title', 'seo_desc', 'seo_kwrds'),
@@ -56,9 +67,7 @@ class CategoryAdmin(admin.ModelAdmin):
     )
 
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'is_active')
-    list_editable = ('is_active',)
-    list_filter = ('is_active',)
+    list_display = ('title',)
     search_fields = ('title',)
 
 
@@ -66,7 +75,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class SubCategoryAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('category', 'title', 'is_active')
+            'fields': ('category', 'title',)
         }),
         ('SEO', {
             'fields': ('slug', 'seo_title', 'seo_desc', 'seo_kwrds'),
@@ -75,7 +84,6 @@ class SubCategoryAdmin(admin.ModelAdmin):
     )
 
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'category', 'is_active')
-    list_editable = ('is_active',)
-    list_filter = ('is_active', 'category__title')
+    list_display = ('title', 'category',)
+    list_filter = ('category__title',)
     search_fields = ('title', 'category__title')

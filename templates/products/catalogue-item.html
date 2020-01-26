@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ product.seo_title }}</title>
+    <meta name="description" content="{{ product.seo_desc }}">
+    <meta name="keywords" content="{{ product.seo_kwrds }}"> 
+{% endblock %}
+
+{% block content %}
+<main role="main">
+    <div class="container py-lg-5 py-4">
+        <ol class="breadcrumb d-none d-md-flex mb-3 mb-lg-4">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'catalogue' %}">Продукция</a></li>
+            <li class="breadcrumb-item"><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
+            {% if subcategory %}
+            <li class="breadcrumb-item"><a href="{{ subcategory.get_absolute_url }}">{{ subcategory.title }}</a></li>
+            {% endif %}
+            <li class="breadcrumb-item active">{{ product.title }}</li>
+        </ol>
+        
+        {% if subcategory %}
+        <a href="{{ subcategory.get_absolute_url }}" title="" class="d-block d-md-none text-dark font-weight-bold smaller mb-3"><i class="fas fa-arrow-left fa-xs mr-2"></i>{{ subcategory.title }}</a>
+        {% else %}
+        <a href="{{ category.get_absolute_url }}" title="" class="d-block d-md-none text-dark font-weight-bold smaller mb-3"><i class="fas fa-arrow-left fa-xs mr-2"></i>{{ category.title }}</a>
+        {% endif %}
+
+        <div class="row mb-4">
+            <div class="col-lg-6">
+                <div class="photo-swipe" itemscope itemtype="http://schema.org/ImageGallery">
+                    <div class="row no-gutters mx-n1">
+                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="mb-2 col-12 px-1">
+                            <a href="{{ product.get_main_image.image.url }}" itemprop="contentUrl" data-size="1920x1440" class="rounded overflow-hidden">
+                                <img src="{{ product.get_main_image.image_big.url }}" itemprop="thumbnail" alt="...">
+                            </a>
+                            <figcaption itemprop="caption description" class="d-none">Информация об изображении, если нужно</figcaption>
+                        </figure>
+                        
+                        {% for item in product.images.all %}
+                            {% if item != product.get_main_image %}
+                            <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="mb-4 col-lg-2 col-md-2 col-3 px-1">
+                                <a href="{{ item.image.url }}" itemprop="contentUrl" data-size="1920x1440" class="rounded overflow-hidden">
+                                    <img src="{{ item.image_small.url }}" itemprop="thumbnail" alt="...">
+                                </a>
+                                <figcaption itemprop="caption description" class="d-none">Информация об изображении, если нужно</figcaption>
+                            </figure>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h1 class="h4 mb-2">{{ product.title }}</h1>
+                <p class="text-muted smaller mb-3">артикул: <span class="font-weight-bold">{{ product.article }}</span></p>
+                <span class="text-nowrap d-block mb-4"><p class="m-0"><span id="product-price" class="number mr-2 mb-0 h3 text-primary">{{ product_price }}</span><i class="fas fa-ruble-sign fa-xs text-muted"></i></p></span>
+
+                <a href="#top" title="" class="d-block smaller mb-4"><i class="fas fa-cog fa-xs mr-2"></i>технические характеристики</a>
+                
+                {% if offer %}
+                <span class="d-block mb-1 smaller font-weight-bold">Тип брусков:</span>
+                <div class="btn-group-sm btn-group-toggle mb-4" data-toggle="buttons">
+                    {% for item in product.offers.all %}
+                    <label class="btn btn-light rounded-0 border px-3 mb-1 active">
+                        <input type="radio" name="options" id="size{{ item.id }}" data-offer-id="{{ item.id }}" autocomplete="off" {% if item == offer %}checked{% endif %}>{{ item.title }}
+                    </label>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <span class="d-block mb-1 smaller font-weight-bold">Количество:</span>
+                <div class="qty mb-4 mb-lg-5">
+                    <span class="minus" data-type="minus" data-field="quant[1]">-</span>
+                    <input type="text" id="in-stock" name="quant[1]" class="count" value="1" min="1" max="{{ in_stock }}">
+                    <span class="plus" data-type="plus" data-field="quant[1]">+</span>
+                </div>
+                
+                {% if not in_cart %}
+                <a id="add-to-cart" data-product-id="{{ product.id }}" class="btn btn-primary btn-to-cart py-3 px-5 font-weight-bold mb-4 mb-lg-0" href="#" role="button"><i class="fas fa-shopping-basket mr-3"></i>добавить в корзину</a>
+                {% endif %}
+                <a id="in-cart" class="{% if not in_cart %}d-none{% endif %} btn btn-outline-primary btn-to-cart py-3 px-5 font-weight-bold mb-4 mb-lg-0" href="{% url 'cart' %}" role="button"><i class="fas fa-check mr-3"></i>в корзине</a>
+            </div>
+        </div>
+
+        <a class="anchor" id="top"></a>
+
+        <ul class="nav nav-tabs flex-column flex-sm-row" role="tablist" id="Info">
+            <li class="nav-item pb-2 pb-sm-0">
+                <a class="nav-link d-inline-block active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Характеристики</a>
+            </li>
+            {% if product.options.all %}
+            <li class="nav-item pb-2 pb-sm-0">
+                <a class="nav-link d-inline-block" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Комплектность</a>
+            </li>
+            {% endif %}
+            <li class="nav-item pb-2 pb-sm-0">
+                <a class="nav-link d-inline-block" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Описание</a>
+            </li>
+
+        </ul>
+        <div class="tab-content pt-4">
+            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                {% for item in product.characteristics.all %}
+                <p class="border-bottom mb-3 pb-3 d-flex flex-column flex-md-row justify-content-md-between"><span class="text-muted mr-3">{{ item.title }}</span>{{ item.value }}</p>
+                {% endfor %}
+            </div>
+            
+            {% if product.options.all %}
+            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                {% for item in product.options.all %}
+                    {% if not item.product_for %}
+                    <p class="border-bottom mb-3 pb-3 d-flex flex-column flex-md-row justify-content-between"><span class="text-muted mr-3">{{ item.title }}</span>{{ item.value }}</p>
+                    {% endif %}
+                {% endfor %}
+                <h5 class="mt-5 mb-4">По заказу за отдельную плату</h5>
+                {% for item in product.options.all %}
+                    {% if item.product_for %}
+                    <p class="border-bottom mb-3 pb-3 d-flex flex-column flex-md-row justify-content-between"><a href="{{ item.product_for.get_absolute_url }}" title="" class="mr-3">{{ item.title }}</a>{{ item.value }}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                {{ product.desc|safe }}
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

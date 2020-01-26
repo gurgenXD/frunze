@@ -76,7 +76,11 @@ $(document).ready(function(){
     var products = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.whitespace,
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: '../products.json'
+        prefetch: '/products/products.json/?query=%QUERY',
+        remote: {
+            url: '/products/products.json/?query=%QUERY',
+            wildcard: '%QUERY'
+        }
     });
 
     $('.typeahead').typeahead(null, {

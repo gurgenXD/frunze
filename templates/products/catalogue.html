@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main role="main">
+    <div class="container py-lg-5 py-4">
+        <ol class="breadcrumb d-none d-md-flex mb-3 mb-lg-4">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item active">Продукция</li>
+        </ol>
+
+        <a href="{% url 'index' %}" title="" class="d-block d-md-none text-dark font-weight-bold smaller mb-3"><i class="fas fa-arrow-left fa-xs mr-2"></i>Главная</a>
+
+        <h1 class="mb-lg-5 mb-4">Продукция</h1>
+        <div class="row mb-4">
+            <div class="col-lg-3">
+                <div class="list-group smaller mb-4 d-none d-md-block">
+                    {% for item in categories %}
+                    <a href="{{ item.get_absolute_url }}" class="list-group-item list-group-item-action">{{ item.title }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="row">
+                    {% for item in products %}
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card catalogue-item mb-4">
+                            <div class="card-horizontal">
+                                <img src="{{ item.get_main_image.image_medium.url }}" class="card-img-top" alt="">
+                                <div class="card-body">
+                                    <a href="{{ item.get_absolute_url }}" class="stretched-link d-block smaller text-dark font-weight-bold" title="">{{ item.title }}</a>
+                                </div>
+                            </div>
+
+                            <div class="card-footer bg-white">
+                                <p class="m-0"><span class="number mr-2 mb-0 h6 text-primary">{{ item.price }}</span><i class="fas fa-ruble-sign fa-xs text-muted"></i></p>
+                            </div>
+                        </div>
+                    </div>      
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

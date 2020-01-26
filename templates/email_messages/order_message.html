@@ -1,0 +1,21 @@
+{% autoescape off %}
+    На сайте http://{{ domain }} новый заказ.
+    
+    Информация о заказе:
+
+    Заказ № {{ order.id }}
+    Дата и время заказа: {{ order.created }}
+
+    ФИО: {{ order.full_name }}
+    E-mail: {{ order.email }}
+    Телефон: {{ order.phone }}
+
+    Товары в заказе:
+    {% for item in order.items.all %}
+        {{ item.product.title }} | {{ item.price }} руб. | {{ item.quantity }} шт. | {{ item.total_price }} руб.
+    {% endfor %}
+
+    Итого: {{ order.total_price }} руб.
+    
+    Ссылка на сайт: http://{{ domain }}
+{% endautoescape %}
