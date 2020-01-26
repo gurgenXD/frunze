@@ -5,7 +5,10 @@ from core.cart import Cart
 
 def context_info(request):
     seo_titles = TitleTag.objects.all()
-    main_phone = Index.objects.first().phone
+
+    index_info = Index.objects.first()
+    main_phone = index_info.phone if index_info else None
+
     categories = Category.objects.all()
 
     cart = Cart(request)

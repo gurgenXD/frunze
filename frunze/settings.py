@@ -25,7 +25,9 @@ SECRET_KEY = '4=9l^@ctz!3hhemdpe@cd1th1-m%_@c+2zryxr!qc!)^tex8#e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'frunze-site.wlms.info',
+]
 
 
 # Application definition
